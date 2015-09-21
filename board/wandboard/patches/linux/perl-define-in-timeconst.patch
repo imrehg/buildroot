@@ -1,0 +1,24 @@
+The use of defined() on arrays and hashes has been deprecated since perl
+5.6, but until 5.17.6 it only warned on lexicals, not package globals.
+
+Signed-off-by: Dagfinn Ilmari Mannsåker <ilmari@ilmari.org>
+---
+ kernel/timeconst.pl |    2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
+
+diff --git a/kernel/timeconst.pl b/kernel/timeconst.pl
+index eb51d76..0461239 100644
+--- a/kernel/timeconst.pl
++++ b/kernel/timeconst.pl
+@@ -370,7 +370,7 @@ if ($hz eq '--can') {
+ 	}
+ 
+ 	@val = @{$canned_values{$hz}};
+-	if (!defined(@val)) {
++	if (!@val) {
+ 		@val = compute_values($hz);
+ 	}
+ 	output($hz, @val);
+-- 
+1.7.5.4
+
